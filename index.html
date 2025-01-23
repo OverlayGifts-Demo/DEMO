@@ -8,7 +8,7 @@
         /* Container for dropdown menus */
         #catalogueContainer {
             position: absolute;
-            top: 20px;
+            bottom: 70px; /* Adjust this value to position it just above the play button */
             left: 50%;
             transform: translateX(-50%);
             z-index: 999;
@@ -103,6 +103,14 @@
                 <option value="bracelet">Diamond Bracelet</option>
             </select>
         </div>
+        <!-- About Us -->
+        <div>
+            <h3>About Us :</h3>
+            <select id="aboutUsSelect">
+                <option value="">-- Select --</option>
+                <option value="intro">Intro Video</option>
+            </select>
+        </div>
     </div>
 
     <!-- Buy Now Button (hidden initially) -->
@@ -136,6 +144,9 @@
             <video id="diamondEarringsVideo" src="DIAMOND earing.mp4" playsinline loop></video>
             <video id="diamondBraceletVideo" src="DIAMOND bracelet.mp4" playsinline loop></video>
 
+            <!-- About Us Video -->
+            <video id="introVideo" src="intro.mp4" playsinline loop></video>
+
             <!-- Logo Image -->
             <img id="logoImage" src="4k.png" />
         </a-assets>
@@ -167,10 +178,11 @@
         // Dropdown elements
         const goldJewelrySelect = document.querySelector('#goldJewelrySelect');
         const diamondJewelrySelect = document.querySelector('#diamondJewelrySelect');
+        const aboutUsSelect = document.querySelector('#aboutUsSelect');
 
         // Function to reset other dropdowns to default when one is selected
         const resetOtherDropdowns = (currentSelect) => {
-            const allSelects = [goldJewelrySelect, diamondJewelrySelect];
+            const allSelects = [goldJewelrySelect, diamondJewelrySelect, aboutUsSelect];
             allSelects.forEach(select => {
                 if (select !== currentSelect) {
                     select.value = "";
@@ -247,6 +259,15 @@
                     break;
                 default:
                     break;
+            }
+        });
+
+        aboutUsSelect.addEventListener('change', (event) => {
+            resetOtherDropdowns(aboutUsSelect);  // Reset other dropdowns
+            changeSelectedDropdownColor(aboutUsSelect); // Change text color
+
+            if (event.target.value === 'intro') {
+                changeJewelryVideo(document.querySelector('#introVideo'), 'https://example.com/about-us');
             }
         });
 
