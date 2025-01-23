@@ -38,12 +38,13 @@
         }
 
         #catalogueContainer h3 {
-            color: #FFF;
+            color: #FFF; /* White color for the text */
             margin: 0 10px 0 0;
             font-size: 16px;
         }
 
-        #buyNowContainer, #playPauseButtonContainer {
+        #buyNowContainer, #playPauseButtonContainer, #aboutUsContainer {
+            color: #FFF;
             position: absolute;
             bottom: 20px;
             z-index: 999;
@@ -58,6 +59,12 @@
         #playPauseButtonContainer {
             right: 20px;
             display: none; /* Hidden by default */
+        }
+
+        #aboutUsContainer {
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
         }
 
         #buyNowButton, #playPauseButton {
@@ -80,17 +87,6 @@
 <body>
     <!-- Catalogue Selection UI -->
     <div id="catalogueContainer">
-        <!-- About Us Section (Moved to the top) -->
-        <div>
-            <h3>About Us:</h3>
-            <select id="aboutUsSelect">
-                <option value="">-- Select --</option>
-                <option value="intro">Introduction</option>
-                <option value="history">Our History</option>
-                <option value="mission">Our Mission</option>
-            </select>
-        </div>
-
         <!-- Gold Jewelry -->
         <div>
             <h3>Gold <br> Jewellery :</h3>
@@ -114,6 +110,17 @@
                 <option value="bracelet">Diamond Bracelet</option>
             </select>
         </div>
+    </div>
+
+    <!-- About Us Section (Positioned between buttons) -->
+    <div id="aboutUsContainer">
+        <h3>About Us:</h3>
+        <select id="aboutUsSelect">
+            <option value="">-- Select --</option>
+            <option value="intro">Introduction</option>
+            <option value="history">Our History</option>
+            <option value="mission">Our Mission</option>
+        </select>
     </div>
 
     <!-- Buy Now Button (hidden initially) -->
@@ -174,6 +181,7 @@
         const buyNowButton = document.querySelector('#buyNowButton');
         const playPauseButton = document.querySelector('#playPauseButton');
         const playPauseButtonContainer = document.querySelector('#playPauseButtonContainer');
+        const aboutUsContainer = document.querySelector('#aboutUsContainer');
 
         // Jewelry and About Us videos
         let currentVideo = null;
@@ -311,6 +319,7 @@
             // Show the Buy Now button
             buyNowContainer.style.display = 'block'; 
             playPauseButtonContainer.style.display = 'block'; // Show Play/Pause button
+            aboutUsContainer.style.display = 'block'; // Show About Us section
 
             if (!isPlaying) {
                 playPauseButton.textContent = 'Play with Audio'; // Updated text
@@ -323,6 +332,7 @@
             document.querySelector('#catalogueContainer').style.display = 'none';
             buyNowContainer.style.display = 'none'; // Hide Buy Now button
             playPauseButtonContainer.style.display = 'none'; // Hide Play/Pause button
+            aboutUsContainer.style.display = 'none'; // Hide About Us section
 
             if (currentVideo) {
                 currentVideo.pause();
