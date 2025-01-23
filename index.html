@@ -80,6 +80,19 @@
 <body>
     <!-- Catalogue Selection UI -->
     <div id="catalogueContainer">
+        <!-- About Us Section -->
+        <div>
+            <h3>About Us:</h3>
+            <select id="aboutUsSelect">
+                <option value="">-- Select --</option>
+                <option value="intro">Introduction</option>
+                <option value="history">Our History</option>
+                <option value="mission">Our Mission</option>
+            </select>
+        </div>
+
+        <br>.</br>
+
         <!-- Gold Jewelry -->
         <div>
             <h3>Gold <br> Jewellery :</h3>
@@ -101,14 +114,6 @@
                 <option value="necklace">Diamond Necklace</option>
                 <option value="earrings">Diamond Earrings</option>
                 <option value="bracelet">Diamond Bracelet</option>
-            </select>
-        </div>
-        <!-- About Us -->
-        <div>
-            <h3>About Us :</h3>
-            <select id="aboutUsSelect">
-                <option value="">-- Select --</option>
-                <option value="intro">Intro Video</option>
             </select>
         </div>
     </div>
@@ -143,9 +148,6 @@
             <video id="diamondNecklaceVideo" src="DIAMOND chain.mp4" playsinline loop></video>
             <video id="diamondEarringsVideo" src="DIAMOND earing.mp4" playsinline loop></video>
             <video id="diamondBraceletVideo" src="DIAMOND bracelet.mp4" playsinline loop></video>
-
-            <!-- About Us Video -->
-            <video id="introVideo" src="intro.mp4" playsinline loop></video>
 
             <!-- Logo Image -->
             <img id="logoImage" src="4k.png" />
@@ -259,15 +261,6 @@
                     break;
                 default:
                     break;
-            }
-        });
-
-        aboutUsSelect.addEventListener('change', (event) => {
-            resetOtherDropdowns(aboutUsSelect);  // Reset other dropdowns
-            changeSelectedDropdownColor(aboutUsSelect); // Change text color
-
-            if (event.target.value === 'intro') {
-                changeJewelryVideo(document.querySelector('#introVideo'), 'https://example.com/about-us');
             }
         });
 
