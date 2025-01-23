@@ -80,7 +80,7 @@
 <body>
     <!-- Catalogue Selection UI -->
     <div id="catalogueContainer">
-        <!-- About Us Section -->
+        <!-- About Us Section (Moved to the top) -->
         <div>
             <h3>About Us:</h3>
             <select id="aboutUsSelect">
@@ -90,8 +90,6 @@
                 <option value="mission">Our Mission</option>
             </select>
         </div>
-
-        <br>.</br>
 
         <!-- Gold Jewelry -->
         <div>
@@ -104,7 +102,7 @@
                 <option value="bracelet">Gold Bracelet</option>
             </select>
         </div>
-        <br>.</br>
+
         <!-- Diamond Jewelry -->
         <div>
             <h3>Diamond<br>Jewellery:</h3>
@@ -149,6 +147,11 @@
             <video id="diamondEarringsVideo" src="DIAMOND earing.mp4" playsinline loop></video>
             <video id="diamondBraceletVideo" src="DIAMOND bracelet.mp4" playsinline loop></video>
 
+            <!-- About Us Videos -->
+            <video id="aboutUsIntroVideo" src="intro.mp4" playsinline loop></video>
+            <video id="aboutUsHistoryVideo" src="about_us_history.mp4" playsinline loop></video>
+            <video id="aboutUsMissionVideo" src="about_us_mission.mp4" playsinline loop></video>
+
             <!-- Logo Image -->
             <img id="logoImage" src="4k.png" />
         </a-assets>
@@ -160,7 +163,7 @@
             <!-- Logo to appear just on top of the target -->
             <a-image src="#logoImage" position="0 0.57 .1" width=".8" height=".8"></a-image>
 
-            <!-- Jewelry Video Display Entity (changes based on user selection) -->
+            <!-- Jewelry or About Us Video Display Entity -->
             <a-plane id="videoDisplay" position="0 0 0" height="0.59" width="1"></a-plane>
         </a-entity>
     </a-scene>
@@ -172,7 +175,7 @@
         const playPauseButton = document.querySelector('#playPauseButton');
         const playPauseButtonContainer = document.querySelector('#playPauseButtonContainer');
 
-        // Jewelry videos
+        // Jewelry and About Us videos
         let currentVideo = null;
         let isPlaying = false;
         let targetVisible = false;
@@ -194,7 +197,7 @@
         };
 
         // Function to update video and play/pause controls
-        const changeJewelryVideo = (videoElement, productLink) => {
+        const changeJewelryOrAboutUsVideo = (videoElement, productLink) => {
             if (currentVideo) {
                 currentVideo.pause();
             }
@@ -226,16 +229,16 @@
 
             switch (event.target.value) {
                 case 'ring':
-                    changeJewelryVideo(document.querySelector('#goldRingVideo'), 'https://www.bluestone.com/jewellery/rings.html');
+                    changeJewelryOrAboutUsVideo(document.querySelector('#goldRingVideo'), 'https://www.bluestone.com/jewellery/rings.html');
                     break;
                 case 'necklace':
-                    changeJewelryVideo(document.querySelector('#goldNecklaceVideo'), 'https://www.bluestone.com/jewellery/necklaces.html');
+                    changeJewelryOrAboutUsVideo(document.querySelector('#goldNecklaceVideo'), 'https://www.bluestone.com/jewellery/necklaces.html');
                     break;
                 case 'earrings':
-                    changeJewelryVideo(document.querySelector('#goldEarringsVideo'), 'https://www.bluestone.com/jewellery/earrings.html');
+                    changeJewelryOrAboutUsVideo(document.querySelector('#goldEarringsVideo'), 'https://www.bluestone.com/jewellery/earrings.html');
                     break;
                 case 'bracelet':
-                    changeJewelryVideo(document.querySelector('#goldBraceletVideo'), 'https://www.bluestone.com/jewellery/bangles.html');
+                    changeJewelryOrAboutUsVideo(document.querySelector('#goldBraceletVideo'), 'https://www.bluestone.com/jewellery/bangles.html');
                     break;
                 default:
                     break;
@@ -248,16 +251,35 @@
 
             switch (event.target.value) {
                 case 'ring':
-                    changeJewelryVideo(document.querySelector('#diamondRingVideo'), 'https://example.com/diamond-rings');
+                    changeJewelryOrAboutUsVideo(document.querySelector('#diamondRingVideo'), 'https://example.com/diamond-rings');
                     break;
                 case 'necklace':
-                    changeJewelryVideo(document.querySelector('#diamondNecklaceVideo'), 'https://example.com/diamond-necklaces');
+                    changeJewelryOrAboutUsVideo(document.querySelector('#diamondNecklaceVideo'), 'https://example.com/diamond-necklaces');
                     break;
                 case 'earrings':
-                    changeJewelryVideo(document.querySelector('#diamondEarringsVideo'), 'https://example.com/diamond-earrings');
+                    changeJewelryOrAboutUsVideo(document.querySelector('#diamondEarringsVideo'), 'https://example.com/diamond-earrings');
                     break;
                 case 'bracelet':
-                    changeJewelryVideo(document.querySelector('#diamondBraceletVideo'), 'https://example.com/diamond-bracelets');
+                    changeJewelryOrAboutUsVideo(document.querySelector('#diamondBraceletVideo'), 'https://example.com/diamond-bracelets');
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        aboutUsSelect.addEventListener('change', (event) => {
+            resetOtherDropdowns(aboutUsSelect); // Reset other dropdowns
+            changeSelectedDropdownColor(aboutUsSelect); // Change text color
+
+            switch (event.target.value) {
+                case 'intro':
+                    changeJewelryOrAboutUsVideo(document.querySelector('#aboutUsIntroVideo'), '');
+                    break;
+                case 'history':
+                    changeJewelryOrAboutUsVideo(document.querySelector('#aboutUsHistoryVideo'), '');
+                    break;
+                case 'mission':
+                    changeJewelryOrAboutUsVideo(document.querySelector('#aboutUsMissionVideo'), '');
                     break;
                 default:
                     break;
